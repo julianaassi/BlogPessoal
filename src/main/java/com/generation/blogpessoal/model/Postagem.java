@@ -1,13 +1,14 @@
 package com.generation.blogpessoal.model;
 
 import java.time.LocalDateTime;
-
 import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -30,7 +31,18 @@ public class Postagem {
 	@Size(min = 5, max = 100, message = "O titulo tem que ser maior que 5 e menor que 100")
 	private String texto;
 	
+	@ManyToOne
+	@JsonIgnoreProperties ("postagem")
+	private Tema tema; 
 	@UpdateTimestamp 
+
+	public Tema getTema() {
+		return tema;
+	}
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
 	private LocalDateTime data;
 
 	public Long getId() {
@@ -64,6 +76,5 @@ public class Postagem {
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
-	
 
 }
