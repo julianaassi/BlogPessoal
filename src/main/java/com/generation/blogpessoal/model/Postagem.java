@@ -23,58 +23,85 @@ public class Postagem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank(message = "O atributo é obrigatório")
+	@NotBlank(message = "O atributo titulo é obrigatório")
 	@Size(min = 5, max = 100, message = "O titulo tem que ser maior que 5 e menor que 100")
 	private String titulo;
 	
 	@NotBlank(message = "O atributo texto é obrigatório")
-	@Size(min = 5, max = 100, message = "O titulo tem que ser maior que 5 e menor que 100")
+	@Size(min = 10, max = 1000, message = "O atributo texto deve conter no minimo 10 e maximo 1000")
 	private String texto;
+	
+	@UpdateTimestamp
+	private LocalDateTime data;
 	
 	@ManyToOne
 	@JsonIgnoreProperties ("postagem")
 	private Tema tema; 
-	@UpdateTimestamp 
+	
+	
+	@ManyToOne
+	@JsonIgnoreProperties("postagem")
+	private Usuario usuario;
 
-	public Tema getTema() {
-		return tema;
-	}
-
-	public void setTema(Tema tema) {
-		this.tema = tema;
-	}
-	private LocalDateTime data;
 
 	public Long getId() {
 		return id;
 	}
 
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 
 	public String getTitulo() {
 		return titulo;
 	}
 
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 
 	public String getTexto() {
 		return texto;
 	}
 
+
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+
 
 	public LocalDateTime getData() {
 		return data;
 	}
 
+
 	public void setData(LocalDateTime data) {
 		this.data = data;
 	}
 
+
+	public Tema getTema() {
+		return tema;
+	}
+
+
+	public void setTema(Tema tema) {
+		this.tema = tema;
+	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }
+
+	
